@@ -1,0 +1,14 @@
+# Ignorar archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar dependencias y archivos compilados
+node_modules/
+vendor/
+*.log
+*.env
+*.sqlite
+__pycache__/
+
+# Ignorar configuración de XAMPP
+xampp/
