@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nombre   = $_POST["nombre"]   ?? "";
     $email    = $_POST["email"]    ?? "";
@@ -17,17 +19,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     if (!empty($errores)) {
-        foreach ($errores as $error) {
-            echo "<p style='color:red;'>$error</p>";
-        }
-        echo "<a href='../../html/signup.html'>Volver al formulario</a>";
-        exit;
+        // Guardar errores en sesión y redirigir a error.php
+        $_SESSION["errores"] = $errores;
+        header("Location: ../Views/error.php");
+        exit();
+    } else {
+        // Redirigir a la página de éxito
+        header("Location: ../Views/success.php");
+        exit();
     }
-
-    echo "<p>¡Registro exitoso!</p>";
-    echo "<a href='../../html/login.html'>Inicia sesión</a>";
-} else {
-    header("Location: ../../html/signup.html");
-    exit;
 }
 ?>
