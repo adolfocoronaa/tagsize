@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Registro Exitoso - TagSize</title>
     <link rel="stylesheet" href="../../css/styles_success.css">
+    <link rel="icon" type="image/png" href="../../public/img/logo-removebg-preview.png">
 </head>
 <body>
     <div class="container">
