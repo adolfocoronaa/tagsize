@@ -12,8 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // Consulta SQL para buscar el usuario
-    $sql = "SELECT id, nombre, email, password, tipo_usuario FROM usuarios WHERE email = ?";
+    // Consulta SQL para buscar el usuario en la nueva base de datos
+    $sql = "SELECT id_usuarios, nombre_usuario, email_usuario, password_usuario, tipo_usuario FROM usuarios WHERE email_usuario = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -22,11 +22,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($resultado->num_rows == 1) {
         $usuario = $resultado->fetch_assoc();
 
-        // Comparar directamente sin password_verify()
-        if ($password == $usuario["password"]) {
+        // Comparar directamente sin password_verify() (Se recomienda almacenar contraseñas hasheadas)
+        if ($password == $usuario["password_usuario"]) {
             // Iniciar sesión y almacenar datos del usuario
-            $_SESSION["usuario_id"] = $usuario["id"];
-            $_SESSION["usuario_nombre"] = $usuario["nombre"];
+            $_SESSION["usuario_id"] = $usuario["id_usuarios"];
+            $_SESSION["usuario_nombre"] = $usuario["nombre_usuario"];
             $_SESSION["usuario_tipo"] = $usuario["tipo_usuario"];
 
             // Redirigir al dashboard
@@ -44,3 +44,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $conn->close();
 ?>
+
